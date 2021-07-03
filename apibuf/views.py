@@ -2,7 +2,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import UserAdminSerizalier
+from .serializers import UserAdminSerizalier, BuffetSerializer, OperationSerializer
 from .models import UserAdmin
 from .auxilary_functions import (create_user_admin,
                                 create_pin_in_pinDB,
@@ -25,9 +25,20 @@ def admin_registration(request):
         return Response(pin, status=status.HTTP_201_CREATED)
 
 
-@api_view('GET')
+@api_view(['GET'])
 def foods_today(request):
     all_foods = get_all_active_foods()
+    serializer = BuffetSerializer(all_foods, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def create_operation(request):
+    operation = request.data
+    sub_operations = operation.pop('oper_details')
+    if request.method == 'POST':
+        operations = OperationSerializer(operation)
+
 
 
 

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import (UserAdmin,
-                     Buffet)
+                     Buffet,
+                     Operations)
 from .validation_func import unique_pin_db_pin
 class UserAdminSerizalier(serializers.Serializer):
     name = serializers.CharField(max_length=50, min_length=1)
@@ -11,4 +12,10 @@ class UserAdminSerizalier(serializers.Serializer):
 class BuffetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Buffet
+        exclude = ('active', )
+
+
+class OperationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Operations
         fields = '__all__'
