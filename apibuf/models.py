@@ -87,9 +87,8 @@ class Operations(models.Model):
                                  default=True)
 
 
-
 class Pin(models.Model):
-    pin = models.CharField('Пин', max_length=6, primary_key=True)
+    pin = models.CharField('Пин', max_length=8, primary_key=True)
 
     def publish(self):
         self.published_date = timezone.now()
