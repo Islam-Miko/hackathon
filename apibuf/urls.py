@@ -1,5 +1,6 @@
 from django.urls import path
-
+from . import views
 urlpatterns = [
-    path('api/v1/', 'apibuf.urls'),
+    path('student_registration', views.student_registration),
+
 ]
