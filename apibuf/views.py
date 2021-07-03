@@ -1,4 +1,4 @@
-
+from .exceptions import NoUserError
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,7 +9,6 @@ from .auxilary_functions import (create_user_admin,
                                 make_pin, get_all_active_foods,
                                 get_student,
                                 create_suboper_details, get_userAdmin,
-NoUserError
                                 )
 
 @api_view(['POST'])
@@ -38,7 +37,7 @@ def admin_authentication(request):
         else:
             return Response('Неверные данные', status=status.HTTP_400_BAD_REQUEST)
     except NoUserError:
-        return Response('Пользователь не найден', status=status.HTTP_400_BAD_REQUEST)
+        return Response('Пользователь не найден в системе ', status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])

@@ -1,6 +1,6 @@
 from .models import UserAdmin, Pin, Buffet
 from .serializers import SubOperationSerializer
-
+from .exceptions  import NoUserError
 def create_user_admin(name, phone, pin):
     new_user = UserAdmin.objects.create(name=name, phone=phone, pin=pin)
     new_user.save()
@@ -27,8 +27,7 @@ def get_student(operation):
     Student = Pin.objects.filter(pin=pin).last()
     return Student
 
-class NoUserError(Exception):
-    ...
+
 def get_userAdmin(data):
     user_admin = UserAdmin.objects.filter(phone=data['userPhone']).last()
     if user_admin is None:
